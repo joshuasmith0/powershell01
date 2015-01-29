@@ -21,5 +21,13 @@ $webClient = New-Object System.Net.WebClient
 
 foreach ($url in $arrayURL)
 {
-    Add-Content -Path $outputFile -Value $webClient.DownloadString($url)
+    try 
+    {
+        Add-Content -Path $outputFile -Value $webClient.DownloadString($url)
+        "[*] Successful: $url"
+    }
+    catch [system.exception] 
+    {
+        "[!] Error: $url"
+    }
 }
